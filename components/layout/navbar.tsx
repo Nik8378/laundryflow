@@ -34,10 +34,10 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
-          <Button variant="ghost" render={<Link href="/login" />}>
+          <Button variant="ghost" nativeButton={false} render={<Link href="/login" />} nativeButton={false}>
             Log in
           </Button>
-          <Button className="rounded-full" render={<Link href="/book" />}>
+          <Button className="rounded-full" nativeButton={false} render={<Link href="/book" />} nativeButton={false}>
             Book Pickup
           </Button>
         </div>
@@ -72,13 +72,13 @@ export function Navbar() {
               <Button
                 variant="outline"
                 className="flex-1"
-                render={<Link href="/login" onClick={() => setOpen(false)} />}
+                nativeButton={false} render={<Link href="/login" onClick={() => setOpen(false)} />}
               >
                 Log in
               </Button>
               <Button
                 className="flex-1 rounded-full"
-                render={<Link href="/book" onClick={() => setOpen(false)} />}
+                nativeButton={false} render={<Link href="/book" onClick={() => setOpen(false)} />}
               >
                 Book Pickup
               </Button>
