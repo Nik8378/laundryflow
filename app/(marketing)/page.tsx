@@ -6,8 +6,7 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { PricingPreview } from "@/components/home/pricing-preview";
 import { ReviewsMarquee } from "@/components/home/reviews-marquee";
 import { CoverageAreas } from "@/components/home/coverage-areas";
-import { FaqSection } from "@/components/home/faq-section";
-import { AppBand } from "@/components/home/app-band";
+import { FaqAppRow } from "@/components/home/faq-app-row";
 import { FinalCta } from "@/components/home/final-cta";
 
 export default function HomePage() {
@@ -21,8 +20,7 @@ export default function HomePage() {
       <PricingPreview />
       <CoverageAreas />
       <ReviewsMarquee />
-      <FaqSection />
-      <AppBand />
+      <FaqAppRow />
       <FinalCta />
     </>
   );
