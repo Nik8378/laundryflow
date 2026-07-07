@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { steps } from "@/constants/steps";
-import { ImagePlaceholder } from "@/components/shared/image-placeholder";
+import Image from "next/image";
 
 export function HowItWorks() {
   const [active, setActive] = useState(0);
@@ -85,11 +85,7 @@ export function HowItWorks() {
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   className="w-full"
                 >
-                  <ImagePlaceholder
-                    size="800×640"
-                    label={`Step ${s.number} — ${s.imageLabel}`}
-                    className="aspect-[5/4] w-full rounded-[2rem] border-border bg-muted/50 text-muted-foreground"
-                  />
+                  <span className="relative block aspect-[5/4] w-full overflow-hidden rounded-[2rem]"><Image src={s.image} alt={s.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /></span>
                 </motion.div>
               </motion.div>
             ))}
