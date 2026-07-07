@@ -1,28 +1,44 @@
 "use client";
 
-import { Star } from "lucide-react";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
 import { reviews, type Review } from "@/constants/reviews";
 
 function ReviewCard({ review }: { review: Review }) {
   return (
-    <figure className="w-[340px] shrink-0 rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md">
+    <motion.figure
+      whileHover={{ y: -8, rotate: -0.6 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="group relative w-[340px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-xl hover:shadow-primary/10 sm:w-[360px]"
+    >
+      <span
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
+      <Quote
+        aria-hidden
+        className="absolute -right-2 -top-2 size-20 rotate-12 text-primary/[0.06] transition-transform duration-500 group-hover:rotate-0 group-hover:scale-110"
+      />
+
       <div className="flex items-center gap-1">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
-            className={`size-4 ${
+            className={`size-4 transition-transform duration-300 group-hover:scale-110 ${
               i < review.rating
                 ? "fill-warning text-warning"
                 : "fill-muted text-muted"
             }`}
+            style={{ transitionDelay: `${i * 40}ms` }}
           />
         ))}
       </div>
-      <blockquote className="mt-3 text-sm leading-relaxed text-foreground/80">
+      <blockquote className="relative mt-3 text-sm leading-relaxed text-foreground/80">
         “{review.text}”
       </blockquote>
       <figcaption className="mt-4 flex items-center gap-3">
-        <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+        <span className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-sm font-semibold text-primary-foreground">
           {review.name.charAt(0)}
         </span>
         <span>
@@ -32,39 +48,39 @@ function ReviewCard({ review }: { review: Review }) {
           </span>
         </span>
       </figcaption>
-    </figure>
-  );
-}
-
-function MarqueeRow({
-  items,
-  reverse = false,
-}: {
-  items: Review[];
-  reverse?: boolean;
-}) {
-  return (
-    <div className="group flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-      {[0, 1].map((copy) => (
-        <div
-          key={copy}
-          aria-hidden={copy === 1}
-          className={`flex shrink-0 gap-5 pr-5 group-hover:[animation-play-state:paused] ${
-            reverse ? "animate-marquee-reverse" : "animate-marquee"
-          }`}
-        >
-          {items.map((review) => (
-            <ReviewCard key={review.name} review={review} />
-          ))}
-        </div>
-      ))}
-    </div>
+    </motion.figure>
   );
 }
 
 export function ReviewsMarquee() {
-  const firstRow = reviews.slice(0, 4);
-  const secondRow = reviews.slice(4);
+  const railRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const updateArrows = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    setCanPrev(rail.scrollLeft > 8);
+    setCanNext(rail.scrollLeft < rail.scrollWidth - rail.clientWidth - 8);
+  }, []);
+
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    updateArrows();
+    rail.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    return () => {
+      rail.removeEventListener("scroll", updateArrows);
+      window.removeEventListener("resize", updateArrows);
+    };
+  }, [updateArrows]);
+
+  const page = (dir: 1 | -1) => {
+    const rail = railRef.current;
+    if (!rail) return;
+    rail.scrollBy({ left: dir * (rail.clientWidth * 0.8), behavior: "smooth" });
+  };
 
   return (
     <section className="overflow-x-clip py-16" id="reviews">
@@ -80,25 +96,58 @@ export function ReviewsMarquee() {
               <span className="italic text-primary">the city.</span>
             </h2>
           </div>
-          <div className="flex items-center gap-4 rounded-2xl border border-border bg-card px-6 py-4 shadow-sm">
-            <span className="font-body text-4xl font-bold tabular-nums">4.9</span>
-            <span>
-              <span className="flex">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-warning text-warning" />
-                ))}
+
+          <div className="flex items-end gap-5">
+            <div className="flex items-center gap-4 rounded-2xl border border-border bg-card px-6 py-4 shadow-sm">
+              <span className="font-body text-4xl font-bold tabular-nums">
+                4.9
               </span>
-              <span className="mt-1 block text-xs text-muted-foreground">
-                from 2,000+ customers
+              <span>
+                <span className="flex">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="size-4 fill-warning text-warning"
+                    />
+                  ))}
+                </span>
+                <span className="mt-1 block text-xs text-muted-foreground">
+                  from 2,000+ customers
+                </span>
               </span>
-            </span>
+            </div>
+
+            {/* Arrows */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => page(-1)}
+                disabled={!canPrev}
+                aria-label="Previous reviews"
+                className="flex size-11 items-center justify-center rounded-full border border-border bg-card shadow-sm transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground disabled:pointer-events-none disabled:opacity-30"
+              >
+                <ArrowLeft className="size-5" />
+              </button>
+              <button
+                onClick={() => page(1)}
+                disabled={!canNext}
+                aria-label="Next reviews"
+                className="flex size-11 items-center justify-center rounded-full border border-border bg-card shadow-sm transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground disabled:pointer-events-none disabled:opacity-30"
+              >
+                <ArrowRight className="size-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-12 flex flex-col gap-5">
-        <MarqueeRow items={firstRow} />
-        <MarqueeRow items={secondRow} reverse />
+      {/* Scrollable review rail */}
+      <div
+        ref={railRef}
+        className="mt-12 flex snap-x gap-5 overflow-x-auto px-6 pb-4 scroll-pl-6 sm:px-10 sm:scroll-pl-10 lg:px-20 lg:scroll-pl-20 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {reviews.map((review) => (
+          <ReviewCard key={review.name} review={review} />
+        ))}
       </div>
     </section>
   );
