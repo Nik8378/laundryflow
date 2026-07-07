@@ -19,6 +19,8 @@ export function FinalCta() {
         className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_70%_20%,oklch(0.685_0.169_237.32_/_0.25),transparent_60%)]"
       />
 
+      <div aria-hidden className="absolute inset-0 opacity-[0.22] mix-blend-soft-light" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "180px 180px" }} />
+
       <div className="relative mx-auto flex max-w-4xl flex-col items-center px-6 py-12 text-center sm:py-14">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
