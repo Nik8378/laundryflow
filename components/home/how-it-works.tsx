@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { steps } from "@/constants/steps";
-import Image from "next/image";
 
 export function HowItWorks() {
   const [active, setActive] = useState(0);
@@ -30,11 +30,13 @@ export function HowItWorks() {
                   exit={{ opacity: 0, y: -24 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                  {/* Giant ghost number */}
                   <span
                     aria-hidden
                     className="pointer-events-none block font-heading text-[7.5rem] font-bold leading-[0.9] sm:text-[9rem]"
-                    style={{ WebkitTextStroke: "2px rgb(79 70 229 / 0.55)", color: "rgb(79 70 229 / 0.06)" }}
+                    style={{
+                      WebkitTextStroke: "2px rgb(79 70 229 / 0.55)",
+                      color: "rgb(79 70 229 / 0.06)",
+                    }}
                   >
                     {step.number}
                   </span>
@@ -83,9 +85,15 @@ export function HowItWorks() {
                   whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="w-full"
+                  className="relative aspect-[5/4] w-full overflow-hidden rounded-[2rem]"
                 >
-                  <span className="relative block aspect-[5/4] w-full overflow-hidden rounded-[2rem]"><Image src={s.image} alt={s.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /></span>
+                  <Image
+                    src={s.image}
+                    alt={s.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
                 </motion.div>
               </motion.div>
             ))}
