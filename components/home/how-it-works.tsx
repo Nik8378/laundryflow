@@ -33,13 +33,13 @@ export function HowItWorks() {
                   {/* Giant ghost number */}
                   <span
                     aria-hidden
-                    className="pointer-events-none block font-heading text-[7.5rem] font-bold leading-[0.9] text-transparent sm:text-[9rem]"
-                    style={{ WebkitTextStroke: "1.5px rgb(79 70 229 / 0.35)" }}
+                    className="pointer-events-none block font-heading text-[7.5rem] font-bold leading-[0.9] sm:text-[9rem]"
+                    style={{ WebkitTextStroke: "2px rgb(79 70 229 / 0.55)", color: "rgb(79 70 229 / 0.06)" }}
                   >
                     {step.number}
                   </span>
 
-                  <div className="-mt-6 flex items-center gap-4">
+                  <div className="mt-4 flex items-center gap-4">
                     <span className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
                       <Icon className="size-6" />
                     </span>
