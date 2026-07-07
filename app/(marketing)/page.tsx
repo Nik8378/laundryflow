@@ -2,6 +2,7 @@ import { Hero } from "@/components/home/hero";
 import { StatsBand } from "@/components/home/stats-band";
 import { ExperienceShowcase } from "@/components/home/experience-showcase";
 import { ServicesGrid } from "@/components/home/services-grid";
+import { HowItWorks } from "@/components/home/how-it-works";
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
       <StatsBand />
       <ExperienceShowcase />
       <ServicesGrid />
+      <HowItWorks />
     </>
   );
 }
