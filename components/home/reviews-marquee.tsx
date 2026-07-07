@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
 import { reviews, type Review } from "@/constants/reviews";
 
@@ -53,9 +53,16 @@ function ReviewCard({ review }: { review: Review }) {
 }
 
 export function ReviewsMarquee() {
+  const sectionRef = useRef<HTMLElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const drift = useTransform(scrollYProgress, [0, 1], ["0px", "-64px"]);
 
   const updateArrows = useCallback(() => {
     const rail = railRef.current;
@@ -83,9 +90,13 @@ export function ReviewsMarquee() {
   };
 
   return (
-    <section className="overflow-x-clip py-16" id="reviews">
+    <section
+      ref={sectionRef}
+      className="overflow-x-clip py-16"
+      id="reviews"
+    >
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10 lg:px-20">
-        <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+        <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
           <div>
             <p className="text-sm font-medium">
               <span className="text-primary">/</span> Reviews
@@ -97,7 +108,7 @@ export function ReviewsMarquee() {
             </h2>
           </div>
 
-          <div className="flex items-end gap-5">
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-4 rounded-2xl border border-border bg-card px-6 py-4 shadow-sm">
               <span className="font-body text-4xl font-bold tabular-nums">
                 4.9
@@ -117,8 +128,7 @@ export function ReviewsMarquee() {
               </span>
             </div>
 
-            {/* Arrows */}
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row">
               <button
                 onClick={() => page(-1)}
                 disabled={!canPrev}
@@ -140,14 +150,19 @@ export function ReviewsMarquee() {
         </div>
       </div>
 
-      {/* Scrollable review rail */}
+      {/* Scrollable rail with scroll-linked drift */}
       <div
         ref={railRef}
-        className="mt-12 flex snap-x gap-5 overflow-x-auto px-6 pb-4 scroll-pl-6 sm:px-10 sm:scroll-pl-10 lg:px-20 lg:scroll-pl-20 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-12 flex snap-x overflow-x-auto pb-4 scroll-pl-6 sm:scroll-pl-10 lg:scroll-pl-20 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {reviews.map((review) => (
-          <ReviewCard key={review.name} review={review} />
-        ))}
+        <motion.div
+          style={{ x: drift }}
+          className="flex gap-5 px-6 sm:px-10 lg:px-20"
+        >
+          {reviews.map((review) => (
+            <ReviewCard key={review.name} review={review} />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
