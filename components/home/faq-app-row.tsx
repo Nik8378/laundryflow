@@ -13,10 +13,11 @@ const perks = [
 ];
 
 function FaqColumn() {
+  // fixed-height column, internal scroll if answers overflow
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div>
+    <div className="lg:h-full lg:overflow-y-auto lg:pr-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <p className="text-sm font-medium">
         <span className="text-primary">/</span> FAQ
       </p>
@@ -138,7 +139,7 @@ function AppColumn() {
 export function FaqAppRow() {
   return (
     <section className="py-16" id="faq">
-      <div className="mx-auto grid max-w-[1600px] items-stretch gap-8 px-6 sm:px-10 lg:grid-cols-2 lg:px-20">
+      <div className="mx-auto grid max-w-[1600px] items-stretch gap-8 px-6 sm:px-10 lg:h-[620px] lg:grid-cols-2 lg:px-20">
         <FaqColumn />
         <AppColumn />
       </div>
