@@ -19,7 +19,7 @@ export function HowItWorks() {
   };
 
   return (
-    <section className="relative overflow-hidden" id="how-it-works">
+    <section className="relative overflow-x-clip" id="how-it-works">
       {/* Atmosphere */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.06] via-transparent to-secondary/[0.05]" />
