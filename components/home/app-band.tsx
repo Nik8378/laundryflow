@@ -14,16 +14,16 @@ export function AppBand() {
   return (
     <section className="py-16">
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10 lg:px-20">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-foreground">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(115deg,oklch(0.62_0.19_35)_0%,oklch(0.72_0.17_45)_45%,oklch(0.78_0.15_65)_100%)]">
           <div
             aria-hidden
-            className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_80%_50%,oklch(0.511_0.262_276.97_/_0.35),transparent_65%)]"
+            className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_80%_50%,oklch(0.9_0.08_85_/_0.4),transparent_65%)]"
           />
           <div className="relative grid items-center gap-10 px-8 py-12 sm:px-12 lg:grid-cols-2 lg:py-0">
             {/* Left: copy */}
             <div className="lg:py-14">
               <p className="text-sm font-medium text-background/60">
-                <span className="text-primary">/</span> Get the App
+                <span className="text-background">/</span> Get the App
               </p>
               <h2 className="mt-3 text-3xl font-semibold leading-[1.12] text-background sm:text-4xl">
                 Laundry in your pocket,
@@ -35,7 +35,7 @@ export function AppBand() {
                   const Icon = perk.icon;
                   return (
                     <div key={perk.text} className="flex items-center gap-3">
-                      <span className="flex size-9 items-center justify-center rounded-xl bg-background/10 text-primary">
+                      <span className="flex size-9 items-center justify-center rounded-xl bg-background/15 text-background">
                         <Icon className="size-4.5" />
                       </span>
                       <span className="text-sm font-medium text-background/80">

@@ -10,7 +10,7 @@ export function FaqSection() {
 
   return (
     <section className="py-16" id="faq">
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-5xl px-6 sm:px-10">
         <div className="text-center">
           <p className="text-sm font-medium">
             <span className="text-primary">/</span> FAQ
