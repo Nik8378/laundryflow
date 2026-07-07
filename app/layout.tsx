@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
+const fraunces = Fraunces({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${bricolage.variable} ${inter.variable} font-body antialiased`}
+        className={`${fraunces.variable} ${inter.variable} font-body antialiased`}
       >
         <ThemeProvider attribute="class" forcedTheme="light">
           {children}
