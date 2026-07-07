@@ -24,7 +24,7 @@ export function ServicesGrid() {
   }, []);
 
   return (
-    <section className="py-24" id="services">
+    <section className="py-16" id="services">
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10 lg:px-20">
         {/* Header row */}
         <p className="text-sm font-medium">
@@ -77,7 +77,7 @@ export function ServicesGrid() {
       {/* Horizontal card rail */}
       <div
         ref={railRef}
-        className="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 scroll-pl-6 sm:px-10 sm:scroll-pl-10 lg:px-20 lg:scroll-pl-20 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 scroll-pl-6 sm:px-10 sm:scroll-pl-10 lg:px-20 lg:scroll-pl-20 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {services.map((service, i) => (
           <motion.div
