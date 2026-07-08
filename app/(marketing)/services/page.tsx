@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { services } from "@/constants/services";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { FinalCta } from "@/components/home/final-cta";
+import { ServiceSearch } from "@/components/services/service-search";
 
 export const metadata: Metadata = {
   title: "Our Services",
@@ -73,6 +74,8 @@ export default function ServicesPage() {
               View Pricing
             </Button>
           </div>
+
+          <ServiceSearch />
 
           {/* perk chips */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
