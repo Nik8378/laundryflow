@@ -16,15 +16,25 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="border-b border-border/40 bg-muted/20">
-        <div className="mx-auto max-w-[1600px] px-6 py-16 sm:px-10 sm:py-20 lg:px-20">
+      {/* Full-screen centered hero */}
+      <section className="relative flex min-h-dvh items-center justify-center overflow-hidden">
+        {/* blue & white gradient background */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#EEF2FF_45%,#DBEAFE_100%)]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_15%,rgba(79,70,229,0.12),transparent_70%)]"
+        />
+
+        <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
           <nav className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Link href="/" className="hover:text-foreground">Home</Link>
             <ChevronRight className="size-3.5" />
             <span className="text-foreground">Services</span>
           </nav>
-          <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
             Everything your <span className="italic text-primary">wardrobe</span> needs
           </h1>
           <p className="mt-5 max-w-xl text-lg text-muted-foreground">
@@ -32,6 +42,25 @@ export default function ServicesPage() {
             cleaning, shoes, curtains and bedding. Expertly cleaned, quality
             checked and delivered fresh.
           </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Button
+              size="lg"
+              className="rounded-full px-8"
+              nativeButton={false}
+              render={<Link href="/book" />}
+            >
+              Book a Pickup
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8"
+              nativeButton={false}
+              render={<Link href="/pricing" />}
+            >
+              View Pricing
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -49,7 +78,7 @@ export default function ServicesPage() {
                   alt={service.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="scale-[1.03] object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="scale-[1.03] object-cover"
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
@@ -86,7 +115,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Reused homepage sections */}
       <HowItWorks />
       <FinalCta />
     </>
