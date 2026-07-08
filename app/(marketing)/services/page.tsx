@@ -108,8 +108,9 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <Link
                 key={service.slug}
+                id={service.slug}
                 href="/book"
-                className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
+                className="group relative flex scroll-mt-24 flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
               >
                 {/* number badge */}
                 <span className="absolute left-4 top-4 z-10 flex size-8 items-center justify-center rounded-full bg-background/80 text-xs font-bold text-primary shadow-sm backdrop-blur">

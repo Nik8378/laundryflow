@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { services } from "@/constants/services";
 
@@ -15,7 +14,6 @@ const rotating = [
 ];
 
 export function ServiceSearch() {
-  const router = useRouter();
   const [value, setValue] = useState("");
   const [placeholder, setPlaceholder] = useState("");
   const [focused, setFocused] = useState(false);
@@ -60,10 +58,18 @@ export function ServiceSearch() {
       )
     : [];
 
-  const submit = () => {
-    if (matches.length > 0) {
-      router.push("/book");
+  const scrollToService = (slug: string) => {
+    const el = document.getElementById(slug);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.classList.add("ring-2", "ring-primary", "ring-offset-2");
+      setTimeout(
+        () => el.classList.remove("ring-2", "ring-primary", "ring-offset-2"),
+        1800
+      );
     }
+    setValue("");
+    setFocused(false);
   };
 
   return (
@@ -77,11 +83,15 @@ export function ServiceSearch() {
           onChange={(e) => setValue(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setTimeout(() => setFocused(false), 150)}
-          onKeyDown={(e) => e.key === "Enter" && submit()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && matches.length > 0) {
+              scrollToService(matches[0].slug);
+            }
+          }}
           className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
         />
         <button
-          onClick={submit}
+          onClick={() => matches.length > 0 && scrollToService(matches[0].slug)}
           className="hidden shrink-0 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:block"
         >
           Search
@@ -94,7 +104,7 @@ export function ServiceSearch() {
             matches.map((s) => (
               <button
                 key={s.slug}
-                onMouseDown={() => router.push("/book")}
+                onMouseDown={() => scrollToService(s.slug)}
                 className="flex w-full items-center justify-between px-5 py-3 text-sm transition-colors hover:bg-accent"
               >
                 <span className="font-medium">{s.title}</span>
@@ -103,7 +113,7 @@ export function ServiceSearch() {
             ))
           ) : (
             <p className="px-5 py-3 text-sm text-muted-foreground">
-              No match — <span className="font-medium text-foreground">book a custom pickup</span>
+              No exact match — try another service name
             </p>
           )}
         </div>
