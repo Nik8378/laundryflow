@@ -40,26 +40,39 @@ export function ExperienceShowcase() {
 
   return (
     <section ref={sectionRef} className="w-full px-6 py-16 sm:px-10 lg:px-20">
-      <div className="grid items-center gap-10 md:grid-cols-[1fr_1.2fr_1fr]">
+      <div className="grid items-center gap-10 text-center lg:grid-cols-[1fr_1.2fr_1fr] lg:text-left">
         {/* Left: heading + copy + CTA */}
-        <div>
-          <h2 className="text-3xl font-semibold leading-[1.18] tracking-tight sm:text-4xl">
-            <motion.span variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} custom={0} className="block">
-              Elevate your
-            </motion.span>
-            <motion.span variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} custom={1} className="block">
-              laundry
-            </motion.span>
-            <motion.span variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} custom={2} className="block italic text-primary">
-              experience
-            </motion.span>
-          </h2>
-          <motion.p variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} custom={3} className="mt-6 text-muted-foreground">
+        <div className="flex flex-col items-center lg:items-start">
+          <motion.h2
+            variants={blurIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            custom={0}
+            className="text-3xl font-semibold leading-[1.15] tracking-tight sm:text-4xl"
+          >
+            Elevate your laundry{" "}
+            <span className="italic text-primary">experience</span>
+          </motion.h2>
+          <motion.p
+            variants={blurIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            custom={1}
+            className="mt-6 max-w-md text-muted-foreground"
+          >
             We combine expert garment care, eco-friendly cleaning and
             door-to-door convenience — so laundry becomes one less thing on
             your mind.
           </motion.p>
-          <motion.div variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} custom={4}>
+          <motion.div
+            variants={blurIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            custom={2}
+          >
             <Button className="mt-7 rounded-full px-6" nativeButton={false} render={<Link href="/about" />}>
               Learn More
               <ArrowRight className="ml-1 size-4" />
@@ -79,21 +92,14 @@ export function ExperienceShowcase() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           custom={3}
-          className="rounded-2xl border border-border bg-card p-6 shadow-sm"
+          className="rounded-2xl border border-border bg-card p-6 text-left shadow-sm"
         >
           {rows.map((row, i) => {
             const Icon = row.icon;
             return (
-              <div
-                key={row.title}
-                className={i === 1 ? "mt-5 border-t border-border pt-5" : ""}
-              >
+              <div key={row.title} className={i === 1 ? "mt-5 border-t border-border pt-5" : ""}>
                 <div className="flex items-center gap-2.5">
-                  <span
-                    className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${
-                      i === 0 ? "bg-primary/10 text-primary" : "bg-secondary/10 text-secondary"
-                    }`}
-                  >
+                  <span className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${i === 0 ? "bg-primary/10 text-primary" : "bg-secondary/10 text-secondary"}`}>
                     <Icon className="size-4" />
                   </span>
                   <h3 className="font-semibold">{row.title}</h3>
