@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { TrackClient } from "@/components/track/track-client";
 
 export const metadata: Metadata = {
@@ -24,6 +25,12 @@ export default function TrackPage() {
           </p>
         </div>
       </section>
+      <div className="mx-auto max-w-5xl px-6 pb-2 sm:px-10">
+        <div className="relative aspect-[3/1] w-full overflow-hidden rounded-3xl">
+          <Image src="/track-banner.png" alt="Your laundry on the way" fill sizes="(max-width: 1024px) 100vw, 60vw" className="object-cover" />
+        </div>
+      </div>
+
       <TrackClient />
     </>
   );
