@@ -11,7 +11,7 @@ export function CoverageAreas() {
   return (
     <section className="py-16" id="coverage">
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10 lg:px-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-12 md:grid-cols-2">
           {/* Left: copy + chips */}
           <div>
             <p className="text-sm font-medium">

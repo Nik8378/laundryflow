@@ -18,7 +18,7 @@ export function PricingPreview() {
           <span className="text-primary">/</span> Pricing
         </p>
 
-        <div className="mt-6 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+        <div className="mt-6 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <h2 className="text-4xl font-semibold leading-[1.1] sm:text-5xl">
             Honest pricing,
             <br />
@@ -52,7 +52,7 @@ export function PricingPreview() {
         </div>
 
         {/* Plan cards */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {plans.map((plan, i) => (
               <motion.div

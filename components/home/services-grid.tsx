@@ -30,7 +30,7 @@ export function ServicesGrid() {
           <span className="text-primary">/</span> Services We Offer
         </p>
 
-        <div className="mt-6 grid items-end gap-10 lg:grid-cols-[1.2fr_1fr]">
+        <div className="mt-6 grid items-end gap-10 md:grid-cols-[1.2fr_1fr]">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

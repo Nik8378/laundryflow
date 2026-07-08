@@ -96,7 +96,7 @@ export function ReviewsMarquee() {
       id="reviews"
     >
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10 lg:px-20">
-        <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <div>
             <p className="text-sm font-medium">
               <span className="text-primary">/</span> Reviews
