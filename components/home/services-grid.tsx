@@ -100,7 +100,7 @@ export function ServicesGrid() {
             className="snap-start"
           >
             <Link
-              href={"/services/" + service.slug}
+              href="/book"
               className="group relative block h-[420px] w-[280px] shrink-0 overflow-hidden rounded-3xl sm:w-[300px]"
             >
               <Image
